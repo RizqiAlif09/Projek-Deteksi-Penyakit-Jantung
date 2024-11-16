@@ -75,3 +75,6 @@ dnspython
 promptflow-core
 promptflow-devkit
 nltk
+fastapi
+uvicorn
+streamlit
