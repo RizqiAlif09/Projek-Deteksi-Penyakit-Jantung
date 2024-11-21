@@ -157,3 +157,6 @@ urllib3
 Werkzeug
 wheel
 wrapt
+package_coffee
+package_tea
+package_water
