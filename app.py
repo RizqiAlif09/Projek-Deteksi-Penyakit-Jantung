@@ -4,7 +4,6 @@ import pickle
 import pandas as pd
 import numpy as np
 
-# Path root untuk frozen application
 app = Flask(__name__)
 
 # Load model, scaler, dan encoder
