@@ -1,4 +1,5 @@
 [build]
+  environment = { PYTHON_VERSION = "3.8" }
   command = "pip install -r requirements.txt && gunicorn -b 0.0.0.0:$PORT app:app"
   publish = "public"  # Sesuaikan jika Anda memiliki folder statis
 
