@@ -5,9 +5,7 @@ import pandas as pd
 import numpy as np
 
 # Path root untuk frozen application
-base_dir = os.path.abspath(os.path.dirname(__file__))
-
-app = Flask(__name__, template_folder=os.path.join(base_dir, 'templates'))
+app = Flask(__name__)
 
 # Load model, scaler, dan encoder
 model = pickle.load(open(os.path.join(base_dir, 'model/model_heart.pkl'), 'rb'))
