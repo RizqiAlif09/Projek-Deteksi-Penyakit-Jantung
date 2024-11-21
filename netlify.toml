@@ -1,8 +1,10 @@
 [build]
-  environment = { PYTHON_VERSION = "3.12.7" }
-  command = "pip install -r requirements.txt && gunicorn -b 0.0.0.0:$PORT app:app"
-  publish = "public"  # Sesuaikan jika Anda memiliki folder statis
+  base = "/"  # Direktori root dari proyek Anda
+  command = "pip install -r requirements.txt && gunicorn -b 0.0.0.0:$PORT app:app"  # Menjalankan Gunicorn
+  publish = "public"  # Folder publik untuk file statis jika ada
 
+[build.environment]
+  PYTHON_VERSION = "3.12.7"
 
 [[redirects]]
   from = "/*"
