@@ -1,14 +1,18 @@
+import os
 from flask import Flask, render_template, request
 import pickle
 import pandas as pd
 import numpy as np
 
-app = Flask(__name__)
+# Path root untuk frozen application
+base_dir = os.path.abspath(os.path.dirname(__file__))
 
-# Load the pre-trained Random Forest model, scaler, and encoder
-model = pickle.load(open('model/model_heart.pkl', 'rb'))
-scaler = pickle.load(open('model/scaler_heart.pkl', 'rb'))
-encoder = pickle.load(open('model/encoder_heart.pkl', 'rb'))
+app = Flask(__name__, template_folder=os.path.join(base_dir, 'templates'))
+
+# Load model, scaler, dan encoder
+model = pickle.load(open(os.path.join(base_dir, 'model/model_heart.pkl'), 'rb'))
+scaler = pickle.load(open(os.path.join(base_dir, 'model/scaler_heart.pkl'), 'rb'))
+encoder = pickle.load(open(os.path.join(base_dir, 'model/encoder_heart.pkl'), 'rb'))
 
 @app.route("/")
 def home():
