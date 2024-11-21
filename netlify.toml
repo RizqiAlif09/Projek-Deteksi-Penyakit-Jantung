@@ -1,7 +1,7 @@
 [build]
-  # Use a custom build command for Python applications
-  command = "pip install -r requirements.txt && python app.py"
-  publish = "build"  # You may not need this for Python, but it's often used for static sites
+  command = "pip install -r requirements.txt && gunicorn -b 0.0.0.0:$PORT app:app"
+  publish = "public"  # Sesuaikan jika Anda memiliki folder statis
+
 
 [[redirects]]
   from = "/*"
