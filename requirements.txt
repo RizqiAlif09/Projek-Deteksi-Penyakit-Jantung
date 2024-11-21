@@ -1,8 +1,5 @@
-# Flask and Web Frameworks
 Flask
 Frozen-Flask
-
-# Machine Learning Libraries
 pandas
 scikit-learn
 scikit-image
@@ -15,8 +12,6 @@ tensorflow
 tensorflow-intel
 torch
 yellowbrick
-
-# Data and Visualization Libraries
 nltk
 opencv-python
 pillow
@@ -25,8 +20,6 @@ tqdm
 tifffile
 joblib
 imageio
-
-# Azure Libraries
 azure-ai-ml
 azure-ai-resources
 azure-common
@@ -50,8 +43,6 @@ azure-mgmt-resource
 azure-mixedreality-authentication
 azure-schemaregistry
 azure-nspkg
-
-# Instrumentation and Telemetry
 opencensus
 opencensus-ext-azure
 opencensus-ext-threading
@@ -67,44 +58,29 @@ opentelemetry-instrumentation-requests
 opentelemetry-instrumentation-urllib
 opentelemetry-instrumentation-urllib3
 opentelemetry-resource-detector-azure
-
-# Security and Authentication Libraries
 msrest
 msrestazure
 msal
 msal-extensions
 pyjwt
 cryptography
-
-# Data Management Libraries
 pyyaml
 marshmallow
 jsonschema
 strictyaml
-
-# Resource Management Libraries
 psutil
 fixedint
 pydash
-
-# Networking and System Libraries
-msal-extensions
 requests
 aiohttp
 websocket-client
 dnspython
 yarl
-
-# NLP and AI Libraries
 openai
 promptflow-core
 promptflow-devkit
-
-# Big Data Libraries
 avro
 uamqp
-
-# General Utilities
 colorama
 blinker
 certifi
@@ -157,6 +133,3 @@ urllib3
 Werkzeug
 wheel
 wrapt
-package_coffee
-package_tea
-package_water
