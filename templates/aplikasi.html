@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Heart Disease - Heal M</title>
+
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+    <!-- Font Awesome icons (free version) -->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+
+    <!-- Core theme CSS (includes Bootstrap) -->
+    <link href="/static/css/aplikasi.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="/static/assets/img/logo-navbar.png" alt="Logo" width="150" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ms-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="masthead">
+        <div class="container">
+            <div class="masthead-subheading">Welcome To Aplication Heal-M!</div>
+            <div class="masthead-heading text-uppercase">Enjoy the app!</div>
+            <a class="btn btn-primary btn-xl text-uppercase" href="#aplikasi">Try It!</a>
+        </div>
+    </header>
+    <!-- Form and Result Section -->
+    <div id="aplikasi" class="container-fluid my-5">
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <!-- Form Section -->
+            <div class="col-lg-8 col-md-10 col-12 card p-4 rounded shadow-lg">
+                <form action="/predict" method="post">
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Usia (Tahun)</label>
+                        <input type="number" name="age" class="form-control" id="age" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <p class="mb-0">Jenis Kelamin</p>
+                        <input class="form-check-input" name="sex" type="radio" value="M" id="M" required>
+                        <label class="form-check-label" for="M">Laki-laki</label>
+                        <input class="form-check-input" name="sex" type="radio" value="F" id="F">
+                        <label class="form-check-label" for="F">Perempuan</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="chest_pain_type" class="form-label">Tipe Nyeri Dada yang dialami</label>
+                        <select class="form-select" name="chest_pain_type" id="chest_pain_type" required>
+                            <option value="" selected disabled>Pilih salah satu</option>
+                            <option value="ATA">Atypical Angina (Nyeri dada yang tidak biasa)</option>
+                            <option value="NAP">Non-Anginal Pain (Nyeri dada yang bukan angina)</option>
+                            <option value="ASY">Asymptomatic (Tidak ada gejala nyeri dada)</option>
+                            <option value="TA">Typical Angina (Nyeri dada khas)</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="resting_bp" class="form-label">Tekanan Darah Istirahat</label>
+                        <input type="number" name="resting_bp" class="form-control" id="resting_bp" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="cholesterol" class="form-label">Kadar Kolesterol</label>
+                        <input type="number" name="cholesterol" class="form-control" id="cholesterol" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="fasting_bs" class="form-label">Kadar Gula Darah?</label>
+                        <select name="fasting_bs" class="form-select" id="fasting_bs" required>
+                            <option value="1">Lebih dari 120 mg/dL</option>
+                            <option value="0">Kurang dari 120 mg/dL</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="resting_ecg" class="form-label">Elektrokardiogram (EKG)</label>
+                        <select class="form-select" name="resting_ecg" id="resting_ecg" required>
+                            <option value="" selected disabled>Pilih salah satu</option>
+                            <option value="Normal">Normal</option>
+                            <option value="ST">ST-T Wave Abnormality (Iskemia atau Serangan Jantung)</option>
+                            <option value="T">Left Ventricular Hypertrophy (Pembesaran Ventrikel Kiri)</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="max_hr" class="form-label">Detak Jantung Maksimal</label>
+                        <input type="number" name="max_hr" class="form-control" id="max_hr" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <p class="mb-0">Angina (nyeri dada) saat Berolahraga</p>
+                        <input class="form-check-input" name="exercise_angina" type="radio" value="Y" id="yes_angina" required>
+                        <label class="form-check-label" for="yes_angina">Ya</label>
+                        <input class="form-check-input" name="exercise_angina" type="radio" value="N" id="no_angina">
+                        <label class="form-check-label" for="no_angina">Tidak</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="oldpeak" class="form-label">Oldpeak (ST Depression)? Contoh (0.1)</label>
+                        <input type="number" step="0.1" name="oldpeak" class="form-control" id="oldpeak" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="st_slope" class="form-label">Kemiringan Segmen ST</label>
+                        <select class="form-select" name="st_slope" id="st_slope" required>
+                            <option value="" selected disabled>Pilih salah satu</option>
+                            <option value="Up">Up Sloping</option>
+                            <option value="Flat">Flat</option>
+                            <option value="Down">Down Sloping</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-block">Prediksi</button>
+                </form>
+            </div>
+
+            <!-- Result Section -->
+            <div class="col-lg-8 col-md-10 col-12 pt-5 px-2 card gx-3 result-card">
+                <h3 class="text-center">Hasil Prediksi</h3>
+                {% if hasil_prediksi %}
+                    <p class="text-center">
+                        Pasien tersebut diprediksi <span class="fw-bold">{{ nilai_kepercayaan }}% {{ hasil_prediksi }}</span>
+                    </p>
+                {% elif error_text %}
+                    <p class="text-center text-danger">{{ error_text }}</p>
+                {% else %}
+                    <p class="text-center">Tidak ada hasil prediksi tersedia.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-lg-start">Copyright &copy; Heal - M 2024</div>
+                <div class="col-lg-4 my-3 my-lg-0">
+                    <a class="btn btn-dark btn-social mx-2" href="https://x.com/rappostor" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/rizzaliff/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/rizqialifpermanaputra/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
+                    <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
