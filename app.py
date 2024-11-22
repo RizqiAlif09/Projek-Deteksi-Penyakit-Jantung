@@ -1,15 +1,27 @@
-import os
+import logging
 from flask import Flask, render_template, request
-import pickle
+import joblib
 import pandas as pd
-import numpy as np
 
+# Inisialisasi Flask app
 app = Flask(__name__)
 
+# Konfigurasi Logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 # Load model, scaler, dan encoder
-model = pickle.load(open(os.path.join(base_dir, 'model/model_heart.pkl'), 'rb'))
-scaler = pickle.load(open(os.path.join(base_dir, 'model/scaler_heart.pkl'), 'rb'))
-encoder = pickle.load(open(os.path.join(base_dir, 'model/encoder_heart.pkl'), 'rb'))
+MODEL_PATH = 'model/model_heart.pkl'
+SCALER_PATH = 'model/scaler_heart.pkl'
+ENCODER_PATH = 'model/encoder_heart.pkl'
+
+try:
+    model = joblib.load(MODEL_PATH)
+    scaler = joblib.load(SCALER_PATH)
+    encoder = joblib.load(ENCODER_PATH)
+    logging.info("Model, scaler, dan encoder berhasil dimuat.")
+except Exception as e:
+    logging.error(f"Gagal memuat model atau preprocessing files: {e}")
+    model, scaler, encoder = None, None, None
 
 @app.route("/")
 def home():
@@ -19,57 +31,59 @@ def home():
 def aplikasi():
     return render_template("aplikasi.html")
 
-@app.route('/predict', methods=['POST'])
-def predict():
+def preprocess_input(data):
+    """Preprocessing input data."""
     try:
-        # Get input values from the form
-        age = int(request.form['age'])
-        sex = request.form['sex']
-        chest_pain_type = request.form['chest_pain_type']
-        resting_bp = int(request.form['resting_bp'])
-        cholesterol = int(request.form['cholesterol'])
-        fasting_bs = int(request.form['fasting_bs'])
-        resting_ecg = request.form['resting_ecg']
-        max_hr = int(request.form['max_hr'])
-        exercise_angina = request.form['exercise_angina']
-        oldpeak = float(request.form['oldpeak'])
-        st_slope = request.form['st_slope']
-
-        # Prepare input data in the same format as the training data
-        input_data = {
-            'Age': age,
-            'Sex': sex,
-            'ChestPainType': chest_pain_type,
-            'RestingBP': resting_bp,
-            'Cholesterol': cholesterol,
-            'FastingBS': fasting_bs,
-            'RestingECG': resting_ecg,
-            'MaxHR': max_hr,
-            'ExerciseAngina': exercise_angina,
-            'Oldpeak': oldpeak,
-            'ST_Slope': st_slope
-        }
-
-        # Convert input data to DataFrame for preprocessing
-        user_input_df = pd.DataFrame([input_data])
-
-        # One-Hot Encoding the categorical features (Sex, ChestPainType, RestingECG, ExerciseAngina, ST_Slope)
-        user_input_encoded = encoder.transform(user_input_df[['Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina', 'ST_Slope']])
+        # One-Hot Encoding the categorical features
+        user_input_encoded = encoder.transform(data[['Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina', 'ST_Slope']])
         encoded_df = pd.DataFrame(user_input_encoded, columns=encoder.get_feature_names_out())
 
-        # Concatenate the encoded features with the rest of the numeric features
-        user_input_df = user_input_df.drop(columns=['Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina', 'ST_Slope'])
-        user_input_df = pd.concat([user_input_df, encoded_df], axis=1)
+        # Drop original categorical features and concatenate encoded ones
+        data = data.drop(columns=['Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina', 'ST_Slope'])
+        processed_data = pd.concat([data, encoded_df], axis=1)
 
-        # Scaling the numeric features
-        user_input_scaled = scaler.transform(user_input_df)
+        # Scale numeric features
+        scaled_data = scaler.transform(processed_data)
 
-        # Predict using the Random Forest model
+        return scaled_data
+    except Exception as e:
+        logging.error(f"Error in preprocessing: {e}")
+        raise ValueError("Terjadi kesalahan dalam proses preprocessing data.")
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    if not model or not scaler or not encoder:
+        error_text = "Model atau preprocessing files tidak tersedia. Hubungi administrator."
+        return render_template('aplikasi.html', hasil_prediksi=None, nilai_kepercayaan=None, error_text=error_text)
+
+    try:
+        # Ambil input dari form
+        input_data = {
+            'Age': int(request.form['age']),
+            'Sex': request.form['sex'],
+            'ChestPainType': request.form['chest_pain_type'],
+            'RestingBP': int(request.form['resting_bp']),
+            'Cholesterol': int(request.form['cholesterol']),
+            'FastingBS': int(request.form['fasting_bs']),
+            'RestingECG': request.form['resting_ecg'],
+            'MaxHR': int(request.form['max_hr']),
+            'ExerciseAngina': request.form['exercise_angina'],
+            'Oldpeak': float(request.form['oldpeak']),
+            'ST_Slope': request.form['st_slope']
+        }
+
+        # Konversi input ke DataFrame
+        user_input_df = pd.DataFrame([input_data])
+
+        # Preprocess data
+        user_input_scaled = preprocess_input(user_input_df)
+
+        # Prediksi menggunakan model
         user_prediction = model.predict(user_input_scaled)
         user_probabilities = model.predict_proba(user_input_scaled)
         heart_disease_probability = user_probabilities[0][1] * 100
 
-        # Display the prediction result
+        # Tampilkan hasil prediksi
         if user_prediction[0] == 0:
             hasil_prediksi = "Tidak ada penyakit jantung"
             nilai_kepercayaan = 100 - heart_disease_probability
@@ -77,11 +91,15 @@ def predict():
             hasil_prediksi = "Ada penyakit jantung"
             nilai_kepercayaan = heart_disease_probability
 
-        return render_template('aplikasi.html', hasil_prediksi=hasil_prediksi, nilai_kepercayaan=round(nilai_kepercayaan, 2), error_text=None)
-
+        return render_template(
+            'aplikasi.html',
+            hasil_prediksi=hasil_prediksi,
+            nilai_kepercayaan=round(nilai_kepercayaan, 2),
+            error_text=None
+        )
     except Exception as e:
-        # Handle invalid inputs or errors
-        error_text = str(e)
+        logging.error(f"Error during prediction: {e}")
+        error_text = "Terjadi kesalahan dalam memproses data. Pastikan semua input sudah benar."
         return render_template('aplikasi.html', hasil_prediksi=None, nilai_kepercayaan=None, error_text=error_text)
 
 if __name__ == '__main__':
