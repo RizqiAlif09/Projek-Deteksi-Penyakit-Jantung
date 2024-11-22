@@ -3,13 +3,10 @@ from flask import Flask, render_template, request
 import joblib
 import pandas as pd
 
-# Inisialisasi Flask app
 app = Flask(__name__)
 
-# Konfigurasi Logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# Load model, scaler, dan encoder
 MODEL_PATH = 'model/model_heart.pkl'
 SCALER_PATH = 'model/scaler_heart.pkl'
 ENCODER_PATH = 'model/encoder_heart.pkl'
@@ -34,15 +31,12 @@ def aplikasi():
 def preprocess_input(data):
     """Preprocessing input data."""
     try:
-        # One-Hot Encoding the categorical features
         user_input_encoded = encoder.transform(data[['Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina', 'ST_Slope']])
         encoded_df = pd.DataFrame(user_input_encoded, columns=encoder.get_feature_names_out())
 
-        # Drop original categorical features and concatenate encoded ones
         data = data.drop(columns=['Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina', 'ST_Slope'])
         processed_data = pd.concat([data, encoded_df], axis=1)
 
-        # Scale numeric features
         scaled_data = scaler.transform(processed_data)
 
         return scaled_data
@@ -57,7 +51,6 @@ def predict():
         return render_template('aplikasi.html', hasil_prediksi=None, nilai_kepercayaan=None, error_text=error_text)
 
     try:
-        # Ambil input dari form
         input_data = {
             'Age': int(request.form['age']),
             'Sex': request.form['sex'],
@@ -72,18 +65,14 @@ def predict():
             'ST_Slope': request.form['st_slope']
         }
 
-        # Konversi input ke DataFrame
         user_input_df = pd.DataFrame([input_data])
 
-        # Preprocess data
         user_input_scaled = preprocess_input(user_input_df)
 
-        # Prediksi menggunakan model
         user_prediction = model.predict(user_input_scaled)
         user_probabilities = model.predict_proba(user_input_scaled)
         heart_disease_probability = user_probabilities[0][1] * 100
 
-        # Tampilkan hasil prediksi
         if user_prediction[0] == 0:
             hasil_prediksi = "Tidak ada penyakit jantung"
             nilai_kepercayaan = 100 - heart_disease_probability
