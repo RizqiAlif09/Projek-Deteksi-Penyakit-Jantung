@@ -1,15 +1,4 @@
-/*!
-* Start Bootstrap - Agency v7.0.12 (https://startbootstrap.com/theme/agency)
-* Copyright 2013-2023 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-agency/blob/master/LICENSE)
-*/
-//
-// Scripts
-// 
-
 window.addEventListener('DOMContentLoaded', event => {
-
-    // Navbar shrink function
     var navbarShrink = function () {
         const navbarCollapsible = document.body.querySelector('#mainNav');
         if (!navbarCollapsible) {
@@ -23,13 +12,10 @@ window.addEventListener('DOMContentLoaded', event => {
 
     };
 
-    // Shrink the navbar 
     navbarShrink();
 
-    // Shrink the navbar when page is scrolled
     document.addEventListener('scroll', navbarShrink);
 
-    //  Activate Bootstrap scrollspy on the main nav element
     const mainNav = document.body.querySelector('#mainNav');
     if (mainNav) {
         new bootstrap.ScrollSpy(document.body, {
@@ -38,7 +24,6 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     };
 
-    // Collapse responsive navbar when toggler is visible
     const navbarToggler = document.body.querySelector('.navbar-toggler');
     const responsiveNavItems = [].slice.call(
         document.querySelectorAll('#navbarResponsive .nav-link')
@@ -54,21 +39,19 @@ window.addEventListener('DOMContentLoaded', event => {
 });
 
 let currentPage = 1;
-const totalPages = 2; // Adjust based on the number of pages
+const totalPages = 2; 
 
 function showPage(pageNumber) {
   const teamContainer = document.querySelector('.team-container');
   
-  if (pageNumber > totalPages || pageNumber < 1) return; // Prevent invalid page numbers
+  if (pageNumber > totalPages || pageNumber < 1) return; 
 
-  // Calculate scroll position based on the page number
   const pageWidth = teamContainer.clientWidth;
   teamContainer.scrollTo({
     left: pageWidth * (pageNumber - 1),
     behavior: 'smooth'
   });
 
-  // Update active dot
   document.querySelectorAll('.pagination-dots .dot').forEach(dot => dot.classList.remove('active'));
   document.querySelectorAll('.pagination-dots .dot')[pageNumber - 1].classList.add('active');
   
@@ -76,42 +59,32 @@ function showPage(pageNumber) {
 }
 
 function submitForm(event) {
-    event.preventDefault();  // Prevent the form from refreshing the page
+    event.preventDefault(); 
 
-    // Add your form submission logic here (e.g., AJAX request or other processing)
-
-    // Optionally show result if it's not dynamically updated from the server
     document.querySelector('.result-card').style.display = 'block';
 }
 
-// Mengatur elemen mana yang akan dianimasikan saat scroll
 document.querySelectorAll('a.nav-link').forEach(link => {
     link.addEventListener('click', function(e) {
         e.preventDefault();
         const targetId = this.getAttribute('href').substring(1);
         const targetElement = document.getElementById(targetId);
         
-        // Scroll ke elemen target
         targetElement.scrollIntoView({ behavior: 'smooth' });
         
-        // Tambahkan kelas animasi setelah scroll
         targetElement.classList.add('animate-section');
         
-        // Hapus animasi setelah selesai agar dapat digunakan kembali
         setTimeout(() => {
             targetElement.classList.remove('animate-section');
-        }, 600); // Waktu ini harus sama dengan durasi animasi slideDown
+        }, 600);
     });
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Ambil semua tautan di navbar
     const navLinks = document.querySelectorAll("#mainNav .nav-link");
 
-    // Dapatkan URL halaman saat ini
     const currentPage = window.location.href;
 
-    // Periksa tautan mana yang sesuai dengan URL
     navLinks.forEach(link => {
         if (link.href === currentPage) {
             link.classList.add("active");
@@ -122,21 +95,17 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 (function() {
-    emailjs.init("SqTmJ0gIwSCVlSwIM"); // Ganti dengan User ID Anda
+    emailjs.init("SqTmJ0gIwSCVlSwIM");
 })();
 
-// Mengirimkan form saat tombol submit ditekan
 document.getElementById('contactForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    // Kirim form menggunakan EmailJS
     emailjs.sendForm('service_4ac1syb', 'template_ark8llc', this)
         .then(function() {
-            // Tampilkan pesan sukses jika berhasil
             alert('Email berhasil terkirim!');
-            document.getElementById('contactForm').reset(); // Reset form setelah berhasil
+            document.getElementById('contactForm').reset();
         }, function(error) {
-            // Tampilkan pesan error jika gagal
             alert('Gagal mengirim email: ' + JSON.stringify(error));
         });
 });
