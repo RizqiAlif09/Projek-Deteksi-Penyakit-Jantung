@@ -49,6 +49,18 @@
             <a class="btn btn-primary btn-xl text-uppercase" href="#aplikasi">Try It!</a>
         </div>
     </header>
+
+    <section class="page-section" id="about">
+      <div class="container">
+          <div class="text-center">
+            <h3 class="section-subheading text-muted healm-description">
+              Web yang kami ajukan berjudul <strong>HEAL-M</strong> atau <em>Heart Disease Early Alert with Machine Learning</em>. 
+              HEAL-M merupakan sistem berbasis machine learning yang mampu mendeteksi risiko penyakit jantung secara cepat dan akurat dengan menganalisis data medis pasien. 
+              Sistem ini dirancang untuk membantu dokter dan tenaga medis memberikan diagnosis dini sehingga memungkinkan pengobatan lebih awal dan mencegah komplikasi serius.
+          </h3>          
+          </div>
+      </div>
+    </section>
     <!-- Form and Result Section -->
     <div id="aplikasi" class="container-fluid my-5">
         <div class="row justify-content-center align-items-center min-vh-100">
@@ -56,20 +68,32 @@
             <div class="col-lg-8 col-md-10 col-12 card p-4 rounded shadow-lg">
                 <form action="/predict" method="post">
                     <div class="mb-3">
-                        <label for="age" class="form-label">Usia (Tahun)</label>
+                        <label for="age" class="form-label">
+                            Usia (Tahun)
+                            <!-- Tombol untuk membuka modal -->
+                            <button type="button" class="btn btn-info btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#infoModal">?</button>
+                        </label>
                         <input type="number" name="age" class="form-control" id="age" required>
                     </div>
 
                     <div class="mb-3">
+                        <div class="mb-3 d-flex align-items-center">
                         <p class="mb-0">Jenis Kelamin</p>
+                        <button type="button" class="btn btn-info btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#sexInfoModal">?</button>
+                        </div>
                         <input class="form-check-input" name="sex" type="radio" value="M" id="M" required>
                         <label class="form-check-label" for="M">Laki-laki</label>
                         <input class="form-check-input" name="sex" type="radio" value="F" id="F">
                         <label class="form-check-label" for="F">Perempuan</label>
+                        <!-- Modal Info -->
                     </div>
 
+                    <!-- Tipe Nyeri Dada -->
                     <div class="mb-3">
-                        <label for="chest_pain_type" class="form-label">Tipe Nyeri Dada yang dialami</label>
+                        <div class="mb-3 d-flex align-items-center">
+                            <label for="chest_pain_type" class="form-label mb-0 me-2">Tipe Nyeri Dada yang dialami</label>
+                            <button type="button" class="btn btn-info btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#chestPainInfoModal">?</button>
+                        </div>
                         <select class="form-select" name="chest_pain_type" id="chest_pain_type" required>
                             <option value="" selected disabled>Pilih salah satu</option>
                             <option value="ATA">Atypical Angina (Nyeri dada yang tidak biasa)</option>
@@ -79,26 +103,42 @@
                         </select>
                     </div>
 
+                    <!-- Tekanan Darah Istirahat -->
                     <div class="mb-3">
+                        <div class="mb-3 d-flex align-items-center">
                         <label for="resting_bp" class="form-label">Tekanan Darah Istirahat</label>
+                        <button type="button" class="btn btn-info btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#bpInfoModal">?</button>
+                        </div>
                         <input type="number" name="resting_bp" class="form-control" id="resting_bp" required>
                     </div>
 
+                    <!-- Kadar Kolesterol -->
                     <div class="mb-3">
+                        <div class="mb-3 d-flex align-items-center">
                         <label for="cholesterol" class="form-label">Kadar Kolesterol</label>
+                        <button type="button" class="btn btn-info btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#cholesterolInfoModal">?</button>
+                        </div>
                         <input type="number" name="cholesterol" class="form-control" id="cholesterol" required>
                     </div>
 
+                    <!-- Kadar Gula Darah -->
                     <div class="mb-3">
+                        <div class="mb-3 d-flex align-items-center">
                         <label for="fasting_bs" class="form-label">Kadar Gula Darah?</label>
+                        <button type="button" class="btn btn-info btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#fastingInfoModal">?</button>
+                        </div>
                         <select name="fasting_bs" class="form-select" id="fasting_bs" required>
                             <option value="1">Lebih dari 120 mg/dL</option>
                             <option value="0">Kurang dari 120 mg/dL</option>
                         </select>
                     </div>
 
+                    <!-- Elektrokardiogram (EKG) -->
                     <div class="mb-3">
+                        <div class="mb-3 d-flex align-items-center">
                         <label for="resting_ecg" class="form-label">Elektrokardiogram (EKG)</label>
+                        <button type="button" class="btn btn-info btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#ecgInfoModal">?</button>
+                        </div>
                         <select class="form-select" name="resting_ecg" id="resting_ecg" required>
                             <option value="" selected disabled>Pilih salah satu</option>
                             <option value="Normal">Normal</option>
@@ -107,51 +147,84 @@
                         </select>
                     </div>
 
+                    <!-- Detak Jantung Maksimal -->
                     <div class="mb-3">
+                        <div class="mb-3 d-flex align-items-center">
                         <label for="max_hr" class="form-label">Detak Jantung Maksimal</label>
+                        <button type="button" class="btn btn-info btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#hrInfoModal">?</button>
+                        </div>
                         <input type="number" name="max_hr" class="form-control" id="max_hr" required>
                     </div>
 
+                    <!-- Angina saat Berolahraga -->
                     <div class="mb-3">
+                        <div class="mb-3 d-flex align-items-center">
                         <p class="mb-0">Angina (nyeri dada) saat Berolahraga</p>
+                        <button type="button" class="btn btn-info btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#anginaInfoModal">?</button>
+                        </div>
                         <input class="form-check-input" name="exercise_angina" type="radio" value="Y" id="yes_angina" required>
                         <label class="form-check-label" for="yes_angina">Ya</label>
                         <input class="form-check-input" name="exercise_angina" type="radio" value="N" id="no_angina">
                         <label class="form-check-label" for="no_angina">Tidak</label>
                     </div>
 
+                    <!-- Oldpeak (ST Depression) -->
                     <div class="mb-3">
+                        <div class="mb-3 d-flex align-items-center">
                         <label for="oldpeak" class="form-label">Oldpeak (ST Depression)? Contoh (0.1)</label>
+                        <button type="button" class="btn btn-info btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#oldpeakInfoModal">?</button>
+                        </div>
                         <input type="number" step="0.1" name="oldpeak" class="form-control" id="oldpeak" required>
                     </div>
 
+                    <!-- Kemiringan Segmen ST -->
                     <div class="mb-3">
+                        <div class="mb-3 d-flex align-items-center">
                         <label for="st_slope" class="form-label">Kemiringan Segmen ST</label>
+                        <button type="button" class="btn btn-info btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#stSlopeInfoModal">?</button>
+                        </div>
                         <select class="form-select" name="st_slope" id="st_slope" required>
                             <option value="" selected disabled>Pilih salah satu</option>
                             <option value="Up">Up Sloping</option>
                             <option value="Flat">Flat</option>
                             <option value="Down">Down Sloping</option>
                         </select>
-                    </div>
+                    </div> 
 
-                    <button type="submit" class="btn btn-block">Prediksi</button>
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="submit" class="btn custom-submit-btn">Prediksi</button>
+                    </div>
                 </form>
             </div>
 
             <!-- Result Section -->
             <div class="col-lg-8 col-md-10 col-12 pt-5 px-2 card gx-3 result-card">
-                <h3 class="text-center">Hasil Prediksi</h3>
-                {% if hasil_prediksi %}
-                    <p class="text-center">
-                        Pasien tersebut diprediksi <span class="fw-bold">{{ nilai_kepercayaan }}% {{ hasil_prediksi }}</span>
-                    </p>
-                {% elif error_text %}
-                    <p class="text-center text-danger">{{ error_text }}</p>
-                {% else %}
-                    <p class="text-center">Tidak ada hasil prediksi tersedia.</p>
-                {% endif %}
-            </div>
+              <h3 class="text-center">Hasil Prediksi</h3>
+              {% if hasil_prediksi %}
+                  <p class="text-center">
+                      Pasien tersebut diprediksi <span class="fw-bold">{{ nilai_kepercayaan }}% {{ hasil_prediksi }}</span>
+                  </p>
+          
+                  {% if nilai_kepercayaan < 50 %}
+                      {% if hasil_prediksi == 'Tidak ada penyakit jantung' %}
+                          <p class="text-center">Pasien ini diprediksi memiliki risiko yang sangat rendah untuk terkena penyakit jantung. Meski demikian, tetap jaga gaya hidup sehat dengan pola makan yang seimbang, rutin berolahraga, dan menghindari stres untuk mempertahankan kesehatan jantung.</p>
+                      {% else %}
+                          <p class="text-center">Pasien ini diprediksi memiliki kemungkinan rendah terkena penyakit jantung, namun tetap disarankan untuk memantau kesehatan jantung secara rutin, mengadopsi pola hidup sehat, dan berkonsultasi dengan dokter untuk langkah pencegahan lebih lanjut.</p>
+                      {% endif %}
+                  {% else %}
+                      {% if hasil_prediksi == 'Tidak ada penyakit jantung' %}
+                          <p class="text-center">Pasien ini diprediksi tidak berisiko tinggi terkena penyakit jantung, meskipun ada faktor yang perlu diperhatikan. Pastikan untuk menjaga pola hidup sehat agar tetap terlindungi dari risiko penyakit jantung di masa depan.</p>
+                      {% else %}
+                          <p class="text-center">Pasien ini diprediksi memiliki risiko tinggi untuk terkena penyakit jantung. Disarankan untuk segera berkonsultasi dengan dokter, menjalani pemeriksaan lebih lanjut, dan melakukan perubahan gaya hidup seperti mengatur pola makan, berolahraga, serta memantau kondisi kesehatan secara berkala.</p>
+                      {% endif %}
+                  {% endif %}
+                  
+              {% elif error_text %}
+                  <p class="text-center text-danger">{{ error_text }}</p>
+              {% else %}
+                  <p class="text-center">Tidak ada hasil prediksi tersedia.</p>
+              {% endif %}
+          </div>
         </div>
     </div>
 
@@ -172,6 +245,249 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modal untuk Usia -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="infoModalLabel">Penjelasan Usia</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Masukkan usia Anda dalam satuan tahun.
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal untuk Jenis Kelamin -->
+  <div class="modal fade" id="sexInfoModal" tabindex="-1" aria-labelledby="sexInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="sexInfoModalLabel">Penjelasan Jenis Kelamin</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Pilih jenis kelamin Anda, apakah Laki-laki atau Perempuan.
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal untuk Tipe Nyeri Dada -->
+  <div class="modal fade" id="chestPainInfoModal" tabindex="-1" aria-labelledby="chestPainInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="chestPainInfoModalLabel">Penjelasan Tipe Nyeri Dada</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Pilih tipe nyeri dada yang Anda alami sesuai dengan kondisi Anda. Jika tidak ada gejala, pilih "Asymptomatic".
+          </p>
+          <p>Tipe Angina (Nyeri Dada) yang Dialami
+            Angina adalah nyeri dada atau ketidaknyamanan yang terjadi akibat suplai darah ke otot jantung yang berkurang. Tipe angina meliputi:
+            <ul>
+                <li>Angina stabil: Nyeri yang muncul saat aktivitas fisik atau stres emosional dan membaik saat istirahat.</li>
+                <li>Angina tidak stabil: Nyeri yang terjadi tiba-tiba, bahkan saat istirahat, dan lebih serius karena bisa menjadi tanda awal serangan jantung.</li>
+                <li>Angina varian (Prinzmetal): Disebabkan oleh kejang arteri koroner, sering terjadi saat istirahat.</li>
+            </ul>
+          </P>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal untuk Tekanan Darah Istirahat -->
+  <div class="modal fade" id="bpInfoModal" tabindex="-1" aria-labelledby="bpInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="bpInfoModalLabel">Penjelasan Tekanan Darah Istirahat</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <p> Masukkan nilai tekanan darah Anda saat istirahat (mmHg)..
+        </p>
+        <p> Tekanan Darah saat Istirahat (mmHg)*
+            Ini adalah tekanan darah seseorang saat tubuh dalam kondisi istirahat (relaks).             
+          <ul>
+              <li>Sistolik (angka atas): Tekanan saat jantung memompa darah.</li>
+              <li>Diastolik* (angka bawah): Tekanan saat jantung dalam fase relaksasi.</li>
+          </ul>
+          Nilai normal tekanan darah biasanya di bawah *120/80 mmHg*.
+        </P>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal untuk Kadar Kolesterol -->
+  <div class="modal fade" id="cholesterolInfoModal" tabindex="-1" aria-labelledby="cholesterolInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cholesterolInfoModalLabel">Penjelasan Kadar Kolesterol</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p> Masukkan kadar kolesterol Anda (mg/dL).
+        </p>
+        <p> Kadar Kolesterol (mg/dL)
+            Mengukur jumlah lemak dalam darah. Parameter utama meliputi:             
+          <ul>
+              <li>Kolesterol total: Idealnya kurang dari 200 mg/dL.</li>
+              <li>LDL (Low-Density Lipoprotein): Kolesterol "jahat", idealnya di bawah 100 mg/dL</li>
+              <li>HDL (High-Density Lipoprotein): Kolesterol "baik", idealnya lebih dari 40 mg/dL pada pria dan 50 mg/dL pada wanita.</li>
+              <li>Trigliserida: Lemak dalam darah, idealnya kurang dari 150 mg/dL</li>
+          </ul>
+        </P>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal untuk Kadar Gula Darah -->
+  <div class="modal fade" id="fastingInfoModal" tabindex="-1" aria-labelledby="fastingInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="fastingInfoModalLabel">Penjelasan Kadar Gula Darah</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p> Pilih kadar gula darah Anda setelah berpuasa. Pilihan: Lebih dari 120 mg/dL atau kurang dari 120 mg/dL.
+        </p>
+        <p> Kadar Gula Darah (mg/dL)
+            Ini adalah jumlah glukosa dalam darah. Nilai normal:            
+          <ul>
+              <li>Puasa: 70 – 99 mg/dL.</li>
+              <li>2 jam setelah makan (postprandial): Kurang dari 140 mg/dL.</li>
+              <li>HbA1c (3 bulan terakhir): Kurang dari 5,7%.</li>
+          </ul>
+        </P>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal untuk Elektrokardiogram (EKG) -->
+  <div class="modal fade" id="ecgInfoModal" tabindex="-1" aria-labelledby="ecgInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ecgInfoModalLabel">Penjelasan Elektrokardiogram (EKG)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p> Pilih hasil elektrokardiogram Anda. "Normal" menunjukkan kondisi jantung yang normal, sementara pilihan lainnya menunjukkan kelainan yang dapat berhubungan dengan iskemia atau pembesaran ventrikel kiri.
+            </p>
+            <p> Hasil Elektrokardiogram (EKG)
+                EKG adalah pemeriksaan untuk merekam aktivitas listrik jantung. Hasilnya dapat menunjukkan:           
+          <ul>
+              <li>Normal: Irama dan gelombang jantung normal.</li>
+              <li>Abnormalitas: Tanda iskemia (aliran darah ke jantung berkurang), infark (kerusakan jaringan jantung), atau gangguan irama.</li>
+          </ul>
+        </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal untuk Detak Jantung Maksimal -->
+  <div class="modal fade" id="hrInfoModal" tabindex="-1" aria-labelledby="hrInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="hrInfoModalLabel">Penjelasan Detak Jantung Maksimal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p> Masukkan nilai detak jantung maksimal Anda (bpm).
+          </p>
+            <p> Detak Jantung Maksimal per Menit (bpm)
+                Detak jantung maksimal dihitung berdasarkan usia:         
+        <ul>
+          <li>{Detak Jantung Maksimal} = 220 - {usia (tahun)} 
+            Misalnya, untuk seseorang berusia 40 tahun, detak jantung maksimal adalah *180 bpm*. 
+            Ini digunakan untuk menentukan zona olahraga yang aman.</li>
+        </ul>
+            </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal untuk Angina saat Berolahraga -->
+  <div class="modal fade" id="anginaInfoModal" tabindex="-1" aria-labelledby="anginaInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="anginaInfoModalLabel">Penjelasan Angina saat Berolahraga</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p> Pilih apakah Anda mengalami angina (nyeri dada) saat berolahraga.
+            </p>
+          <p> Angina (Nyeri Dada) saat Berolahraga
+            Mengacu pada munculnya nyeri dada selama aktivitas fisik. 
+            Ini menunjukkan bahwa suplai darah ke jantung tidak mencukupi untuk 
+            memenuhi kebutuhan selama olahraga, seringkali karena penyempitan arteri koroner.        
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal untuk Oldpeak (ST Depression) -->
+  <div class="modal fade" id="oldpeakInfoModal" tabindex="-1" aria-labelledby="oldpeakInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="oldpeakInfoModalLabel">Penjelasan Oldpeak (ST Depression)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p> Masukkan nilai Oldpeak (ST Depression), yang menunjukkan tingkat keparahan penurunan segmen ST dalam EKG.
+        </p>
+          <p> Oldpeak (Depresi Gelombang ST pada EKG)
+            Oldpeak adalah depresi segmen ST yang diukur pada EKG saat stres atau setelah olahraga. Hal ini menggambarkan:       
+      <ul>
+        <li>Derajat depresi ST*: Perbedaan antara segmen ST normal dan yang tertekan, menunjukkan iskemia jantung.</li>
+        <li>Semakin besar oldpeak, semakin parah potensi penyumbatan.</li>
+      </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal untuk Kemiringan Segmen ST -->
+  <div class="modal fade" id="stSlopeInfoModal" tabindex="-1" aria-labelledby="stSlopeInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="stSlopeInfoModalLabel">Penjelasan Kemiringan Segmen ST</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p> Pilih jenis kemiringan segmen ST: Up Sloping, Flat, atau Down Sloping. Ini berhubungan dengan kondisi jantung Anda.
+        </p>
+          <p>Kemiringan Segmen ST pada EKG
+            Menggambarkan arah segmen ST pada EKG:       
+      <ul>
+        <li>Upsloping (menanjak): Biasanya kurang signifikan, tetapi tetap diperiksa.</li>
+        <li>Flat (datar): Bisa menjadi tanda awal iskemia.</li>
+        <li>Downsloping (menurun): Biasanya menunjukkan iskemia yang lebih serius.</li>
+      </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
