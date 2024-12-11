@@ -11070,45 +11070,98 @@ header.masthead .masthead-heading {
   font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+/* Modal Dialog */
 .portfolio-modal .modal-dialog {
-  margin: 1rem;
-  max-width: 100vw;
+  margin: 1rem; /* Margin kecil agar modal tidak terlalu menempel pada tepi layar */
+  max-width: 90vw; /* Mengurangi lebar modal di perangkat mobile agar lebih proporsional */
 }
+
+/* Modal Content */
 .portfolio-modal .modal-content {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
+  padding-top: 4rem; /* Kurangi padding atas agar lebih efisien di layar kecil */
+  padding-bottom: 4rem; /* Kurangi padding bawah */
   text-align: center;
 }
 
+/* Heading (Judul Modal) */
 .portfolio-modal .modal-content h2, .portfolio-modal .modal-content .h2 {
-  font-size: 3rem;
-  line-height: 3rem;
+  font-size: 2rem; /* Sesuaikan ukuran font pada layar kecil */
+  line-height: 2.5rem; /* Mengurangi jarak antar baris teks */
 }
+
+/* Deskripsi Intro */
 .portfolio-modal .modal-content p.item-intro {
   font-style: italic;
-  margin-bottom: 2rem;
-  font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  margin-bottom: 1.5rem; /* Mengurangi jarak bawah agar lebih efisien */
+  font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
+
+/* Paragraf Biasa */
 .portfolio-modal .modal-content p {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Mengurangi jarak bawah agar lebih ringkas */
 }
+
+/* List Inline */
 .portfolio-modal .modal-content ul.list-inline {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Mengurangi jarak bawah list */
 }
+
+/* Gambar Modal */
 .portfolio-modal .modal-content img {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Mengurangi margin bawah pada gambar */
+  max-width: 100%; /* Pastikan gambar menyesuaikan lebar modal */
+  height: auto; /* Memastikan rasio gambar tetap terjaga */
 }
+
+/* Tombol Tutup Modal */
 .portfolio-modal .close-modal {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  width: 3rem;
-  height: 3rem;
+  top: 1rem; /* Kurangi jarak atas */
+  right: 1rem; /* Kurangi jarak kanan */
+  width: 2.5rem; /* Ukuran icon lebih kecil */
+  height: 2.5rem; /* Ukuran icon lebih kecil */
   cursor: pointer;
   background-color: transparent;
 }
+
+/* Hover pada Tombol Tutup */
 .portfolio-modal .close-modal:hover {
   opacity: 0.3;
+}
+
+/* Responsif untuk perangkat dengan lebar layar kecil */
+@media (max-width: 767px) {
+  .portfolio-modal .modal-dialog {
+    max-width: 95vw; /* Modal lebih besar di layar kecil */
+    margin: 10px auto; /* Margin lebih kecil di layar kecil */
+  }
+
+  .portfolio-modal .modal-content {
+    padding-top: 3rem; /* Padding atas lebih kecil */
+    padding-bottom: 3rem; /* Padding bawah lebih kecil */
+  }
+
+  .portfolio-modal .modal-content h2 {
+    font-size: 1.8rem; /* Ukuran font lebih kecil pada layar kecil */
+    line-height: 2.2rem;
+  }
+
+  .portfolio-modal .modal-content p.item-intro {
+    font-size: 1rem; /* Ukuran font deskripsi lebih kecil pada layar kecil */
+  }
+
+  .portfolio-modal .modal-content p {
+    font-size: 1rem; /* Ukuran font paragraf lebih kecil */
+  }
+
+  .portfolio-modal .modal-content ul.list-inline {
+    font-size: 0.9rem; /* Ukuran font list lebih kecil */
+  }
+
+  .portfolio-modal .close-modal {
+    width: 2rem; /* Ukuran tombol lebih kecil pada layar kecil */
+    height: 2rem;
+  }
 }
 
 #portfolio .row {
@@ -11491,11 +11544,63 @@ section#contact form#contactForm :-ms-input-placeholder {
   color: #ced4da;
 }
 
+/* Footer Styling */
 .footer {
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 1rem; /* Ukuran font yang lebih besar untuk kenyamanan baca */
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  padding: 2rem 0; /* Padding vertikal */
 }
+
+/* Styling untuk tombol sosial media */
+.footer .btn-social {
+  font-size: 1.5rem; /* Ukuran ikon sosial media */
+  padding: 0.5rem; /* Padding tombol sosial media */
+  border-radius: 50%; /* Membuat tombol berbentuk bulat */
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect untuk tombol sosial media */
+.footer .btn-social:hover {
+  background-color: #007bff; /* Efek warna saat hover */
+}
+
+.footer .link-dark {
+  color: #fff; /* Warna putih untuk teks */
+  text-decoration: none; /* Menghapus garis bawah */
+}
+
+.footer .link-dark:hover {
+  color: #007bff; /* Warna biru saat hover */
+}
+
+
+/* Responsif untuk perangkat kecil */
+@media (max-width: 767px) {
+  /* Mengatur footer agar lebih terpusat di perangkat kecil */
+  .footer {
+      font-size: 0.875rem; /* Ukuran font sedikit lebih kecil pada perangkat mobile */
+      padding: 1.5rem 0; /* Mengurangi padding pada perangkat kecil */
+  }
+
+  /* Mengatur posisi elemen dalam footer */
+  .footer .row {
+      text-align: center; /* Semua elemen di rata tengah */
+  }
+
+  /* Mengatur ukuran tombol sosial media lebih kecil */
+  .footer .btn-social {
+      font-size: 1.3rem; /* Ukuran ikon sosial media lebih kecil */
+      margin: 0.5rem; /* Memberikan jarak antar ikon sosial media */
+  }
+
+  /* Menata link Privacy Policy dan Terms of Use */
+  .footer .link-dark {
+      display: block; /* Membuat link menjadi baris terpisah */
+      margin-top: 1rem; /* Menambah jarak antara link */
+  }
+}
+
 
 /* Animasi slide down */
 @keyframes slideDown {
@@ -11512,4 +11617,42 @@ section#contact form#contactForm :-ms-input-placeholder {
 /* Gaya untuk menerapkan animasi */
 .animate-section {
   animation: slideDown 1.2s cubic-bezier(0.25, 1, 0.5, 1); /* Durasi lebih lama dengan easing yang lebih halus */
+}
+
+@media (max-width: 767px) {
+  /* Menata ulang kolom agar lebih teratur pada layar kecil */
+  .footer .row {
+      text-align: center; /* Menyusun konten secara terpusat */
+  }
+
+  /* Menambahkan margin bawah pada elemen-elemen kolom */
+  .footer .col-12 {
+      margin-bottom: 15px;
+  }
+
+  /* Memastikan tombol sosial media berada di tengah pada perangkat mobile */
+  .footer .btn-social {
+      margin: 5px;
+  }
+}
+
+/* Menyesuaikan tampilan pada layar besar (desktop) */
+@media (min-width: 768px) {
+  .footer .col-lg-4 {
+      text-align: left; /* Menyusun elemen-elemen di sisi kiri */
+  }
+
+  .footer .col-lg-4.text-center {
+      text-align: center; /* Menyusun tombol sosial media di tengah */
+  }
+
+  .footer .col-lg-4.text-end {
+      text-align: right; /* Menyusun link di sisi kanan */
+  }
+
+  /* Menambahkan jarak antar elemen sosial media pada layar besar */
+  .footer .btn-social {
+      margin-left: 10px;
+      margin-right: 10px;
+  }
 }
