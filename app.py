@@ -7,9 +7,9 @@ app = Flask(__name__)
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-MODEL_PATH = '/home/kelompok2project/mysite/model/model_heart.pkl'
-SCALER_PATH = '/home/kelompok2project/mysite/model/scaler_heart.pkl'
-ENCODER_PATH = '/home/kelompok2project/mysite/model/encoder_heart.pkl'
+MODEL_PATH = 'model/model_heart.pkl'
+SCALER_PATH = 'model/scaler_heart.pkl'
+ENCODER_PATH = 'model/encoder_heart.pkl'
 
 try:
     model = joblib.load(MODEL_PATH)
@@ -95,4 +95,4 @@ def predict():
         return render_template('aplikasi.html', hasil_prediksi=None, nilai_kepercayaan=None, error_text=error_text)
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)
