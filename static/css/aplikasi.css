@@ -594,6 +594,22 @@ body {
   --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
+.healm-description {
+  text-align: center;
+  line-height: 1.8;
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  font-style: italic;
+  color: #000;
+}
+.healm-description strong {
+  font-weight: bold;
+  color: #000000; /* Warna teks yang lebih gelap untuk penekanan */
+}
+.healm-description em {
+  color: #000000; /* Memberi warna abu-abu halus untuk teks miring */
+}
 
 
 /* Navbar */
@@ -647,6 +663,19 @@ nav {
 #aplikasi {
     margin-top: 120px; /* Adjust the value as needed */
 }
+
+.custom-submit-btn {
+  background-color: blue; /* Warna latar belakang biru */
+  color: white; /* Warna teks putih */
+  border: 2px solid blue; /* Border biru */
+  transition: background-color 0.3s ease, border-color 0.3s ease; /* Efek transisi saat hover */
+}
+
+.custom-submit-btn:hover {
+  background-color: green; /* Warna latar belakang saat dihover menjadi hijau */
+  border-color: green; /* Border berubah menjadi hijau saat dihover */
+}
+
 
 
 header.masthead {
@@ -783,4 +812,62 @@ footer {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.footer {
+  text-align: center;
+  font-size: 1rem; /* Ukuran font yang lebih besar untuk kenyamanan baca */
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  background-color: #212529; /* Latar belakang gelap */
+  color: #fff; /* Warna teks putih untuk kontras */
+  padding: 2rem 0; /* Padding vertikal */
+}
+
+/* Styling untuk tombol sosial media */
+.footer .btn-social {
+  font-size: 1.5rem; /* Ukuran ikon sosial media */
+  padding: 0.5rem; /* Padding tombol sosial media */
+  border-radius: 50%; /* Membuat tombol berbentuk bulat */
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect untuk tombol sosial media */
+.footer .btn-social:hover {
+  background-color: #007bff; /* Efek warna saat hover */
+}
+
+/* Link privasi dan syarat penggunaan */
+.footer .link-dark {
+  text-decoration: none; /* Menghapus garis bawah dari tautan */
+  color: #fff; /* Warna tautan putih */
+}
+
+.footer .link-dark:hover {
+  color: #007bff; /* Warna hover untuk tautan */
+}
+
+/* Responsif untuk perangkat kecil */
+@media (max-width: 767px) {
+  /* Mengatur footer agar lebih terpusat di perangkat kecil */
+  .footer {
+      font-size: 0.875rem; /* Ukuran font sedikit lebih kecil pada perangkat mobile */
+      padding: 1.5rem 0; /* Mengurangi padding pada perangkat kecil */
+  }
+
+  /* Mengatur posisi elemen dalam footer */
+  .footer .row {
+      text-align: center; /* Semua elemen di rata tengah */
+  }
+
+  /* Mengatur ukuran tombol sosial media lebih kecil */
+  .footer .btn-social {
+      font-size: 1.3rem; /* Ukuran ikon sosial media lebih kecil */
+      margin: 0.5rem; /* Memberikan jarak antar ikon sosial media */
+  }
+
+  /* Menata link Privacy Policy dan Terms of Use */
+  .footer .link-dark {
+      display: block; /* Membuat link menjadi baris terpisah */
+      margin-top: 1rem; /* Menambah jarak antara link */
+  }
 }
