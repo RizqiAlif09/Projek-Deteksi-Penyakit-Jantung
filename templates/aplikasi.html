@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="HEAL-M - Heart Disease Early Alert" />
+    <title>HEAL-M | Heart Disease Prediction</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico" />
+
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+    <!-- Modern Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 & Custom CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/aplikasi.css" rel="stylesheet" />
+</head>
+
+<body id="page-top">
+    <!-- Glassmorphism Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top glassy-nav" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+                <i class="fas fa-heartbeat text-health-primary fs-3 pulse-icon"></i>
+                <span class="fw-bold text-dark fs-4">HEAL-M</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
+                <i class="fas fa-bars fs-4 text-dark"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link fw-medium" href="/">Kembali ke Beranda</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Form and Result Section -->
+    <div id="aplikasi" class="container my-5 pt-5">
+        <div class="row justify-content-center">
+            
+            <!-- Header Text -->
+            <div class="col-12 text-center mb-5 fade-in-up">
+                <div class="badge bg-soft-health text-health-primary px-3 py-2 rounded-pill mb-3">
+                    <i class="fas fa-shield-heart me-1"></i> Early Diagnostic
+                </div>
+                <h2 class="fw-bold text-dark mb-3">Cek Risiko Kesehatan Jantung</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">
+                    Sistem mendeteksi risiko penyakit jantung secara cepat dengan menganalisis parameter medis. Masukkan data Anda dengan akurat.
+                </p>
+            </div>
+
+            <!-- Form Section -->
+            <div class="col-lg-8 col-md-10">
+                <div class="card form-card border-0 p-4 p-md-5 fade-in-up" style="animation-delay: 0.1s;">
+                    <form action="/predict" method="post">
+                        <div class="row g-4">
+                            <!-- Usia -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-dark">
+                                    Usia (Tahun) 
+                                    <i class="fas fa-info-circle text-muted ms-1 info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Masukkan usia Anda saat ini dalam angka penuh (contoh: 45)."></i>
+                                </label>
+                                <input type="number" name="age" class="form-control custom-input" placeholder="Contoh: 45" required>
+                            </div>
+
+                            <!-- Jenis Kelamin -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-dark">
+                                    Jenis Kelamin 
+                                    <i class="fas fa-info-circle text-muted ms-1 info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Pilih Laki-laki atau Perempuan sesuai identitas biologis."></i>
+                                </label>
+                                <div class="d-flex gap-3">
+                                    <input type="radio" class="btn-check" name="sex" id="M" value="M" required>
+                                    <label class="btn btn-outline-health w-50 rounded-pill" for="M">Laki-laki</label>
+
+                                    <input type="radio" class="btn-check" name="sex" id="F" value="F">
+                                    <label class="btn btn-outline-health w-50 rounded-pill" for="F">Perempuan</label>
+                                </div>
+                            </div>
+
+                            <!-- Tipe Nyeri Dada -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-dark">
+                                    Tipe Nyeri Dada 
+                                    <i class="fas fa-info-circle text-muted ms-1 info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Pilih jenis rasa sakit dada yang paling sering Anda alami. Jika tidak ada, pilih Asymptomatic."></i>
+                                </label>
+                                <select class="form-select custom-input" name="chest_pain_type" required>
+                                    <option value="" selected disabled>Pilih gejala...</option>
+                                    <option value="ATA">Atypical Angina (Tidak biasa)</option>
+                                    <option value="NAP">Non-Anginal Pain (Bukan angina)</option>
+                                    <option value="ASY">Asymptomatic (Tidak ada gejala)</option>
+                                    <option value="TA">Typical Angina (Khas)</option>
+                                </select>
+                            </div>
+
+                            <!-- Tekanan Darah Istirahat -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-dark">
+                                    Tekanan Darah (mmHg) 
+                                    <i class="fas fa-info-circle text-muted ms-1 info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Tekanan darah sistolik (angka pertama/atas) saat Anda sedang istirahat santai (contoh normal: 120)."></i>
+                                </label>
+                                <input type="number" name="resting_bp" class="form-control custom-input" placeholder="Contoh: 120" required>
+                            </div>
+
+                            <!-- Kadar Kolesterol -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-dark">
+                                    Kolesterol (mg/dL) 
+                                    <i class="fas fa-info-circle text-muted ms-1 info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Kadar total kolesterol serum dalam darah. Nilai normal umumnya di bawah 200."></i>
+                                </label>
+                                <input type="number" name="cholesterol" class="form-control custom-input" placeholder="Contoh: 200" required>
+                            </div>
+
+                            <!-- Kadar Gula Darah -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-dark">
+                                    Gula Darah Puasa 
+                                    <i class="fas fa-info-circle text-muted ms-1 info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Pilih apakah kadar gula darah Anda setelah berpuasa (tidak makan) melebihi batas 120 mg/dL."></i>
+                                </label>
+                                <select name="fasting_bs" class="form-select custom-input" required>
+                                    <option value="" selected disabled>Pilih tingkat...</option>
+                                    <option value="1">Lebih dari 120 mg/dL</option>
+                                    <option value="0">Kurang dari 120 mg/dL</option>
+                                </select>
+                            </div>
+
+                            <!-- Elektrokardiogram (EKG) -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-dark">
+                                    Hasil EKG 
+                                    <i class="fas fa-info-circle text-muted ms-1 info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Hasil rekam detak jantung (Elektrokardiogram) Anda saat istirahat. Pilih Normal jika tidak ada riwayat kelainan."></i>
+                                </label>
+                                <select class="form-select custom-input" name="resting_ecg" required>
+                                    <option value="" selected disabled>Pilih hasil...</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="ST">ST-T Wave Abnormality</option>
+                                    <option value="T">Left Ventricular Hypertrophy</option>
+                                </select>
+                            </div>
+
+                            <!-- Detak Jantung Maksimal -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-dark">
+                                    Detak Jantung Maks. (bpm) 
+                                    <i class="fas fa-info-circle text-muted ms-1 info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Angka detak jantung paling tinggi yang pernah Anda capai saat beraktivitas (Heart Rate Maximum)."></i>
+                                </label>
+                                <input type="number" name="max_hr" class="form-control custom-input" placeholder="Contoh: 150" required>
+                            </div>
+
+                            <!-- Angina saat Berolahraga -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-dark">
+                                    Nyeri Dada Saat Olahraga? 
+                                    <i class="fas fa-info-circle text-muted ms-1 info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Pilih 'Ya' jika Anda merasakan nyeri atau sesak di dada ketika sedang berolahraga/beraktivitas berat."></i>
+                                </label>
+                                <div class="d-flex gap-3">
+                                    <input type="radio" class="btn-check" name="exercise_angina" id="yes_angina" value="Y" required>
+                                    <label class="btn btn-outline-danger w-50 rounded-pill" for="yes_angina">Ya</label>
+
+                                    <input type="radio" class="btn-check" name="exercise_angina" id="no_angina" value="N">
+                                    <label class="btn btn-outline-success w-50 rounded-pill" for="no_angina">Tidak</label>
+                                </div>
+                            </div>
+
+                            <!-- Oldpeak -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-dark">
+                                    Oldpeak (ST Depression) 
+                                    <i class="fas fa-info-circle text-muted ms-1 info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Penurunan segmen ST pada pembacaan EKG akibat aktivitas fisik dibandingkan saat istirahat (contoh: 1.5)."></i>
+                                </label>
+                                <input type="number" step="0.1" name="oldpeak" class="form-control custom-input" placeholder="Contoh: 1.5" required>
+                            </div>
+
+                            <!-- Kemiringan Segmen ST -->
+                            <div class="col-md-12">
+                                <label class="form-label fw-semibold text-dark">
+                                    Kemiringan Segmen ST 
+                                    <i class="fas fa-info-circle text-muted ms-1 info-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Pola pergerakan garis segmen ST pada EKG. Pilih Flat, Up Sloping (naik), atau Down Sloping (turun)."></i>
+                                </label>
+                                <select class="form-select custom-input" name="st_slope" required>
+                                    <option value="" selected disabled>Pilih kemiringan...</option>
+                                    <option value="Up">Up Sloping</option>
+                                    <option value="Flat">Flat</option>
+                                    <option value="Down">Down Sloping</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mt-5 text-center">
+                            <button type="submit" class="btn btn-primary-health btn-lg rounded-pill px-5 py-3 shadow-lg w-100 fw-bold">
+                                Proses Analisis
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Result Section -->
+            {% if hasil_prediksi or error_text %}
+            <div class="col-lg-8 col-md-10 mt-5" id="result-section">
+                <div class="card result-card border-0 p-5 text-center fade-in-up">
+                    <div class="result-icon mb-3">
+                        {% if hasil_prediksi == 'Tidak ada penyakit jantung' %}
+                            <i class="fas fa-heart-circle-check text-success" style="font-size: 4rem;"></i>
+                        {% elif error_text %}
+                            <i class="fas fa-triangle-exclamation text-warning" style="font-size: 4rem;"></i>
+                        {% else %}
+                            <i class="fas fa-heart-crack text-danger pulse-icon" style="font-size: 4rem;"></i>
+                        {% endif %}
+                    </div>
+                    
+                    <h3 class="fw-bold mb-3">Hasil Diagnosis</h3>
+                    
+                    {% if hasil_prediksi %}
+                        <div class="alert {% if hasil_prediksi == 'Tidak ada penyakit jantung' %}alert-success{% else %}alert-danger{% endif %} border-0 rounded-4 py-3">
+                            <h5 class="mb-0">Prediksi: <strong>{{ hasil_prediksi }}</strong></h5>
+                            <small class="text-muted">Tingkat Persentase: {{ nilai_kepercayaan }}%</small>
+                        </div>
+
+                        <p class="text-muted mt-3 lh-lg">
+                            {% if nilai_kepercayaan < 50 %}
+                                {% if hasil_prediksi == 'Tidak ada penyakit jantung' %}
+                                    Risiko sangat rendah. Tetap jaga gaya hidup sehat dengan pola makan seimbang dan rutin berolahraga.
+                                {% else %}
+                                    Kemungkinan rendah, namun tetap disarankan memantau kesehatan secara rutin dan berkonsultasi dengan dokter.
+                                {% endif %}
+                            {% else %}
+                                {% if hasil_prediksi == 'Tidak ada penyakit jantung' %}
+                                    Tidak berisiko tinggi, namun pastikan menjaga pola hidup sehat untuk perlindungan jangka panjang.
+                                {% else %}
+                                    <strong>Risiko Tinggi terdeteksi.</strong> Sangat disarankan untuk segera berkonsultasi dengan tenaga medis profesional untuk pemeriksaan lebih lanjut.
+                                {% endif %}
+                            {% endif %}
+                        </p>
+                    {% elif error_text %}
+                        <p class="text-danger fw-medium">{{ error_text }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- JS untuk mencegah layar lompat ke atas saat menampilkan hasil -->
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const resultEl = document.getElementById("result-section");
+                    if(resultEl) {
+                        resultEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+            </script>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer py-4 mt-auto glassy-footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-lg-start text-muted mb-3 mb-lg-0 fw-medium">
+                    &copy; HEAL-M 2024. All Rights Reserved.
+                </div>
+                <div class="col-lg-4 d-flex justify-content-center gap-3 mb-3 mb-lg-0">
+                    <a class="btn-social" href="https://portofolio-rizqi-one.vercel.app/" target="_blank" title="Portfolio"><i class="fas fa-globe"></i></a>
+                    <a class="btn-social" href="https://www.instagram.com/rizzaliff/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a class="btn-social" href="https://www.linkedin.com/in/rizqialifpermanaputra/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a class="text-muted text-decoration-none me-3 hover-health" href="#!">Privacy Policy</a>
+                    <a class="text-muted text-decoration-none hover-health" href="#!">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script Utama (Bootstrap & Tooltip Initialization) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Inisialisasi fitur Tooltip Bootstrap agar berfungsi saat di-hover/diklik
+        document.addEventListener("DOMContentLoaded", function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+        });
+    </script>
+</body>
+</html>

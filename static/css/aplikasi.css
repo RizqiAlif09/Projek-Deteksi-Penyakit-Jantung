@@ -1,0 +1,171 @@
+/* ========================================================
+   HEAL-M Application - Modern HealthTech UI
+   ======================================================== */
+
+:root {
+    --health-primary: #0ca678;     /* Modern Teal */
+    --health-secondary: #0b2b5c;   /* Deep Navy */
+    --health-accent: #3bc9db;      /* Light Cyan */
+    --bg-light: #f0fdfa;           /* Soft Mint Background */
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #334155;
+    background-color: var(--bg-light);
+    /* Modern Mesh Gradient Background pengganti gambar daun */
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(12, 166, 120, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(59, 201, 219, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(11, 43, 92, 0.05) 0px, transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Utilities --- */
+.text-health-primary { color: var(--health-primary) !important; }
+.bg-soft-health { background-color: rgba(12, 166, 120, 0.1) !important; }
+.hover-health:hover { color: var(--health-primary) !important; transition: 0.3s; }
+
+/* --- Navbar Glassmorphism --- */
+.glassy-nav {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    padding: 1rem 0;
+}
+.navbar-nav .nav-link {
+    color: var(--health-secondary);
+    transition: all 0.3s ease;
+}
+.navbar-nav .nav-link:hover {
+    color: var(--health-primary);
+}
+
+/* --- Form Cards --- */
+.form-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0,0,0,0.02);
+}
+
+/* --- Custom Inputs --- */
+.custom-input {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    color: #334155;
+    transition: all 0.3s ease;
+}
+.custom-input:focus {
+    background-color: #ffffff;
+    border-color: var(--health-primary);
+    box-shadow: 0 0 0 4px rgba(12, 166, 120, 0.1);
+}
+.info-icon {
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+.info-icon:hover {
+    color: var(--health-primary) !important;
+}
+
+/* --- Custom Radio Buttons (Pill Toggle) --- */
+.btn-outline-health {
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    font-weight: 500;
+}
+.btn-check:checked + .btn-outline-health {
+    background-color: var(--health-primary);
+    color: white;
+    border-color: var(--health-primary);
+    box-shadow: 0 4px 12px rgba(12, 166, 120, 0.2);
+}
+
+/* --- Submit Button --- */
+.btn-primary-health {
+    background: linear-gradient(135deg, var(--health-primary), #09825d);
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+}
+.btn-primary-health:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(12, 166, 120, 0.3) !important;
+    color: white;
+}
+
+/* --- Result Section --- */
+.result-card {
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+    border-top: 5px solid var(--health-primary);
+}
+.alert-danger {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #b91c1c;
+}
+.alert-success {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #047857;
+}
+
+/* --- Footer --- */
+.glassy-footer {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+.btn-social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #f1f5f9;
+    color: #475569;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.btn-social:hover {
+    background: var(--health-primary);
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* --- Animations --- */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.pulse-icon {
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .form-card { padding: 1.5rem !important; }
+    .btn-lg { padding: 1rem !important; font-size: 1rem; }
+}

@@ -1,0 +1,280 @@
+/* ========================================================
+   HEAL-M: Modern HealthTech Custom Styles
+   Author: K2 Awan Pintar
+   ======================================================== */
+
+/* --- Variables & Core Setup --- */
+:root {
+    --color-primary: #0ca678;       /* Teal - Health, Fresh, Healing */
+    --color-secondary: #0b2b5c;     /* Navy - Trust, Technology, Professional */
+    --color-accent: #ff6b6b;        /* Soft Red - Heart, Alert, Emergency */
+    --color-light: #f8f9fa;
+    --color-dark: #212529;
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Nunito', sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    color: #495057;
+    background-color: var(--color-light);
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: var(--font-heading);
+}
+
+section {
+    padding: 6rem 0;
+}
+
+/* --- Utilities & Custom Classes --- */
+.text-primary-health { color: var(--color-primary) !important; }
+.bg-primary-health { background-color: var(--color-primary) !important; }
+.bg-soft-primary { background-color: rgba(12, 166, 120, 0.1) !important; }
+.text-gradient {
+    background: linear-gradient(45deg, var(--color-primary), #20c997);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.heading-divider {
+    height: 4px;
+    width: 60px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    border-radius: 2px;
+}
+
+/* --- Buttons --- */
+.btn-primary-health {
+    background: linear-gradient(135deg, var(--color-primary), #12b886);
+    color: white;
+    border: none;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.btn-primary-health:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(12, 166, 120, 0.3) !important;
+    color: white;
+}
+
+/* --- Glassmorphism Navbar --- */
+.glassy-nav {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+.navbar-nav .nav-link {
+    color: var(--color-secondary) !important;
+    font-weight: 600;
+    margin: 0 10px;
+    position: relative;
+    transition: color 0.3s;
+}
+.navbar-nav .nav-link:hover {
+    color: var(--color-primary) !important;
+}
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--color-primary);
+    transition: all 0.3s ease;
+}
+.navbar-nav .nav-link:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* --- Hero Section (Masthead) --- */
+.masthead {
+    position: relative;
+    background-color: #f1f8f9; /* Soft hospital blue */
+    background-image: radial-gradient(circle at 100% 100%, rgba(12, 166, 120, 0.05) 0%, transparent 50%),
+                      radial-gradient(circle at 0% 0%, rgba(11, 43, 92, 0.05) 0%, transparent 50%);
+    padding-top: 10rem;
+    padding-bottom: 6rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+.masthead-heading {
+    font-size: 3.5rem;
+    line-height: 1.2;
+}
+.masthead-subheading {
+    font-size: 1.15rem;
+    line-height: 1.8;
+}
+.wave-bottom {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+}
+.wave-bottom svg {
+    display: block;
+    width: calc(130% + 1.3px);
+    height: 90px;
+}
+
+/* --- Service Cards --- */
+.service-card {
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy hover */
+}
+.service-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(12, 166, 120, 0.15);
+}
+.icon-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s ease;
+}
+.service-card:hover .icon-box {
+    transform: scale(1.1) rotate(5deg);
+    background-color: var(--color-primary) !important;
+}
+.service-card:hover .icon-box i {
+    color: white !important;
+}
+
+/* --- Team Cards --- */
+.team-card {
+    background: white;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+.team-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(11, 43, 92, 0.1);
+}
+.team-img-wrapper img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 5px solid white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+}
+.team-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    background: #f1f3f5;
+    color: var(--color-secondary);
+    border-radius: 50%;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+.team-social a:hover {
+    background: var(--color-primary);
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* --- Contact Section --- */
+.bg-gradient-health {
+    background: linear-gradient(135deg, var(--color-secondary), #174082);
+    position: relative;
+}
+.form-card {
+    border-radius: 20px;
+}
+.form-control:focus {
+    box-shadow: none;
+    border: 2px solid var(--color-primary) !important;
+}
+.form-floating label {
+    color: #6c757d;
+}
+
+/* --- Logo Partners --- */
+.partner-logos img {
+    max-height: 60px;
+    object-fit: contain;
+}
+.grayscale-hover {
+    filter: grayscale(100%) opacity(60%);
+    transition: all 0.3s ease;
+}
+.grayscale-hover:hover {
+    filter: grayscale(0%) opacity(100%);
+    transform: scale(1.05);
+}
+
+/* ========================================================
+   ANIMATIONS (FRESH & ELEGANT)
+   ======================================================== */
+
+/* 1. Heartbeat Animation for Main CTA & Icons */
+@keyframes heartPulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.6); }
+    50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 107, 107, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+}
+.btn-heart-pulse {
+    animation: heartPulse 2s infinite;
+}
+.heartbeat-icon {
+    animation: pulse 1.5s infinite;
+    color: var(--color-accent);
+}
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* 2. Floating Animation for Illustrations */
+.float-animation {
+    animation: float 4s ease-in-out infinite;
+}
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+/* 3. Scroll Reveal Animations (Triggered by JS above) */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.fade-in-left {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.fade-in-up.visible, .fade-in-left.visible {
+    opacity: 1;
+    transform: translate(0);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 991.98px) {
+    .masthead { padding-top: 8rem; text-align: center; }
+    .masthead-heading { font-size: 2.5rem; }
+    .masthead .text-start { text-align: center !important; }
+}
