@@ -1,0 +1,202 @@
+.application-main {
+    min-height: calc(100vh - 150px);
+    padding: clamp(2.5rem, 6vw, 5rem) 0;
+}
+
+.application-container {
+    max-width: 1050px;
+}
+
+.application-heading {
+    max-width: 720px;
+    margin: 0 auto 2.5rem;
+    text-align: center;
+}
+
+.application-heading h1 {
+    max-width: none;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+}
+
+.application-heading > p:last-child {
+    margin: 0 auto;
+    color: var(--muted);
+    font-size: 1.05rem;
+}
+
+.form-panel,
+.result-panel {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--surface);
+}
+
+.form-panel {
+    padding: clamp(1.25rem, 4vw, 2.75rem);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.55rem;
+    color: var(--ink);
+    font-weight: 800;
+}
+
+.field-group {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.choice-row {
+    display: flex;
+    gap: 0.7rem;
+}
+
+.choice-button {
+    min-height: 46px;
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 0.8rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--ink);
+    font-weight: 700;
+    text-align: center;
+    transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+.choice-button:hover {
+    border-color: var(--brand);
+    background: var(--brand-soft);
+    color: var(--ink);
+}
+
+.btn-check:checked + .choice-button {
+    border-color: var(--brand);
+    background: var(--brand);
+    color: #ffffff;
+}
+
+:root[data-theme="dark"] .btn-check:checked + .choice-button {
+    color: #10211f;
+}
+
+.btn-check:focus-visible + .choice-button {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+}
+
+.custom-input {
+    min-height: 48px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background-color: var(--page);
+    color: var(--ink);
+}
+
+.custom-input::placeholder {
+    color: var(--muted);
+    opacity: 1;
+}
+
+.custom-input:hover:not(:disabled) {
+    border-color: var(--brand);
+}
+
+.custom-input:focus {
+    border-color: var(--brand);
+    background-color: var(--surface);
+    color: var(--ink);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 24%, transparent);
+}
+
+.custom-input option {
+    background: var(--surface);
+    color: var(--ink);
+}
+
+.form-submit {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.submit-button {
+    width: min(100%, 420px);
+    min-height: 52px;
+}
+
+.submit-button:disabled {
+    opacity: 0.7;
+}
+
+.form-status {
+    margin: 0.9rem 0 0;
+    color: var(--muted);
+}
+
+.result-panel {
+    margin-top: 1.5rem;
+    overflow: hidden;
+}
+
+.result-content,
+.result-empty {
+    padding: clamp(1.25rem, 4vw, 2rem);
+}
+
+.result-content h2,
+.result-empty h2 {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+.result-content p:last-child,
+.result-empty p:last-child {
+    margin-bottom: 0;
+    color: var(--muted);
+}
+
+.result-probability {
+    color: var(--ink);
+}
+
+.result-positive {
+    border-top: 4px solid #197552;
+}
+
+.result-warning,
+.result-error {
+    border-top: 4px solid #a93c35;
+}
+
+.result-positive .eyebrow {
+    color: #12633f;
+}
+
+.result-warning .eyebrow,
+.result-error .eyebrow {
+    color: #9a342e;
+}
+
+:root[data-theme="dark"] .result-positive .eyebrow {
+    color: #9fe2b8;
+}
+
+:root[data-theme="dark"] .result-warning .eyebrow,
+:root[data-theme="dark"] .result-error .eyebrow {
+    color: #ffaaa1;
+}
+
+@media (max-width: 575.98px) {
+    .application-heading {
+        text-align: left;
+    }
+
+    .application-heading > p:last-child {
+        margin-left: 0;
+    }
+}

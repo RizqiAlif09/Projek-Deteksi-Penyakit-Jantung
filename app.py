@@ -1,15 +1,26 @@
 import logging
+import os
+from pathlib import Path
 from flask import Flask, render_template, request
 import joblib
 import pandas as pd
 
-app = Flask(__name__)
+APP_ROOT = Path(__file__).resolve().parent
+MODEL_DIR = APP_ROOT / "model"
+IS_VERCEL = os.environ.get("VERCEL") == "1"
+STATIC_DIR = None if IS_VERCEL else str(APP_ROOT / "public" / "static")
+
+app = Flask(
+    __name__,
+    static_folder=STATIC_DIR,
+    static_url_path=None if IS_VERCEL else "/static",
+)
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-MODEL_PATH = 'model/model_heart.pkl'
-SCALER_PATH = 'model/scaler_heart.pkl'
-ENCODER_PATH = 'model/encoder_heart.pkl'
+MODEL_PATH = MODEL_DIR / "model_heart.pkl"
+SCALER_PATH = MODEL_DIR / "scaler_heart.pkl"
+ENCODER_PATH = MODEL_DIR / "encoder_heart.pkl"
 
 try:
     model = joblib.load(MODEL_PATH)
@@ -49,7 +60,7 @@ def preprocess_input(data):
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    if not model or not scaler or not encoder:
+    if model is None or scaler is None or encoder is None:
         error_text = "Model atau preprocessing files tidak tersedia. Hubungi administrator."
         return render_template('aplikasi.html', hasil_prediksi=None, nilai_kepercayaan=None, error_text=error_text)
 
@@ -95,4 +106,4 @@ def predict():
         return render_template('aplikasi.html', hasil_prediksi=None, nilai_kepercayaan=None, error_text=error_text)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=False, host='0.0.0.0', port=5000)

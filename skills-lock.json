@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "skills": {
+    "anatomy": {
+      "source": "wheresryan22/anatomy",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "37fe1f16683eddee1b3723a3fe8e4a5b92bb653a6991128a372d3268730cdc90"
+    },
+    "antislop": {
+      "source": "miqdadbadjuber/anti-slop",
+      "sourceType": "github",
+      "skillPath": "skills/antislop/SKILL.md",
+      "computedHash": "6bf3658758c463dab7b740de4b9547b3c7146beb60dcfdda64a64d54261b54a9"
+    },
+    "firebase-security-rules-auditor": {
+      "source": "firebase/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/firebase-security-rules-auditor/SKILL.md",
+      "computedHash": "c910ebaa427236f3b6d5e72112c85c44676dc9046787988dbd07c5573cca7f1b"
+    },
+    "flask-python": {
+      "source": "mindrally/skills",
+      "sourceType": "github",
+      "skillPath": "flask-python/SKILL.md",
+      "computedHash": "6b3af9f13305b41a6162a6eb304462ffc79579ce50bb6cca7a2bc96f56bbf36b"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "computedHash": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474"
+    },
+    "web3d-integration-patterns": {
+      "source": "freshtechbro/claudedesignskills",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/web3d-integration-patterns/SKILL.md",
+      "computedHash": "031b411386de803fb3612bbcec35077ea6bfa414765c950c834ae226ad71acf8"
+    }
+  }
+}
